@@ -1,0 +1,30 @@
+create table user(
+id int(8) primary key auto_increment,
+name varchar(10) not null,
+password varchar(60),
+email varchar(20)
+);
+
+commit;
+drop table user;
+select * from user;
+
+insert into user (name, email) values ('aaa','bbbb');
+insert into user (name, email) values ('badaf','bbbb');
+insert into user (name, email) values ('badca','bbbb');
+commit;
+select * from user;
+
+delete from Porder;
+drop table Porder;
+
+create table Porder(
+id int(8) primary key auto_increment,
+product varchar(10) not null,
+user_id int(8)
+);
+
+insert into Porder (product,user_id) values ('오징어',5);
+insert into Porder (product,user_id) values ('장어',5);
+commit;
+select * from Porder;
