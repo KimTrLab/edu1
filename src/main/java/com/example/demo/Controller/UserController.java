@@ -1,6 +1,6 @@
 package com.example.demo.Controller;
 
-import java.util.stream.Collectors;
+import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
@@ -13,6 +13,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.example.demo.Service.UserService;
 import com.example.demo.dto.UserDTO;
+import com.example.demo.helper.ValidationUtil;
 
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
@@ -30,17 +31,35 @@ public class UserController {
 
 	@CrossOrigin(origins = "http://localhost:3000")
 	@PostMapping("/register")
-	public ResponseEntity<String> register(@Valid @RequestBody UserDTO request, BindingResult bindingResult) { // json형태로
-																												// 받겠다.
-		// http://localhost:8080/api/users/register?name=aoq&password=123411111&email=a@a.com
-		// System.out.println("aaa");
-
-		userService.registerUser(request);
+    public ResponseEntity<?> register(@Valid @RequestBody UserDTO request, BindingResult bindingResult) {
+		
+		// 유효성 체크 process
+		// Valid  > 서비스 Layer (이름과, 이메일 유니크 체크) > database 무결성
+		// Valid는 Hepler 패키지에서 처리
+		// 서비스 Layer와 database무결성은 error 패키지에서 처리
+		// ---------------------------------------------------------------------------------
+		
+		
+        // 유효성 검증 실패 처리
+		// helper package 분리하여 코드 분리 하여 주석 처리
+		/*  
+        if (bindingResult.hasErrors()) {
+            Map<String, String> errors = bindingResult.getFieldErrors().stream()
+                    .collect(Collectors.toMap(
+                            e -> e.getField(),
+                            e -> e.getDefaultMessage()
+                    ));
+            return ResponseEntity.badRequest().body(errors);
+        }*/
+		
+		//helper package 분리하여 코드 변경 
+		// 분리하면 규모와 재사용성을 고려했다는 의미가 있다.. 코드이 가독성만 따지면 컨트롤러에 두는게 나은 듯
 		if (bindingResult.hasErrors()) {
-			String errorMsg = bindingResult.getFieldErrors().stream()
-					.map(e -> e.getField() + ": " + e.getDefaultMessage()).collect(Collectors.joining(", "));
-			return ResponseEntity.badRequest().body(errorMsg);
+		    return ResponseEntity.badRequest().body(ValidationUtil.extractErrors(bindingResult));
 		}
-		return ResponseEntity.ok("회원가입 성공");
-	}
+
+        // 서비스 등록
+        userService.registerUser(request);
+        return ResponseEntity.ok(Map.of("message", "회원가입 성공"));
+    }
 }

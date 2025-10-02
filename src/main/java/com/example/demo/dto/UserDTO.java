@@ -23,7 +23,7 @@ public class UserDTO {
 	@NameLength
 	private String name;
 
-	@NotBlank(message = "비밀번호는 필수입니다.")
+	@NotBlank(message = "Notblank 비밀번호는 필수입니다.")
 	@Size(min = 8, max = 10)
 	private String password;
 

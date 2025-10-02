@@ -1,12 +1,19 @@
 
 CREATE TABLE user (
     id BIGINT AUTO_INCREMENT PRIMARY KEY,
-    name VARCHAR(10) NOT NULL,
+    name VARCHAR(10) unique key NOT NULL,
     password VARCHAR(60) NOT NULL,
-    email VARCHAR(50),
-    CHECK (CHAR_LENGTH(name) >= 2),       -- 최소 4글자
-    CHECK (CHAR_LENGTH(password) >= 8)    -- 최소 8글자
+    email VARCHAR(50) unique key,
+    constraint CHK_USER_NAME CHECK (CHAR_LENGTH(name) >= 2),       -- 최소 4글자
+    constraint CHK_USER_EMAIL CHECK (CHAR_LENGTH(password) >= 8)    -- 최소 8글자
 );
+
+create table Porder(
+	id BIGINT primary key auto_increment,
+	product varchar(10) not null,
+	user_id BIGINT 
+);
+
 
 
 commit;
@@ -18,17 +25,9 @@ insert into user (name, email) values ('aaa','bbbb');
 insert into user (name, email) values ('badaf','bbbb');
 insert into user (name, email) values ('badca','bbbb');
 commit;
-select * from user;
 
 delete from Porder;
 drop table Porder;
-
-create table Porder(
-id BIGINT primary key auto_increment,
-product varchar(10) not null,
-user_id BIGINT 
-);
-
 insert into Porder (product,user_id) values ('오징어',5);
 insert into Porder (product,user_id) values ('장어',5);
 commit;
