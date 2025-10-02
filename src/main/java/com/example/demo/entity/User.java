@@ -1,4 +1,4 @@
-package com.example.demo.domain;
+package com.example.demo.entity;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -11,12 +11,16 @@ import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.OneToMany;
 import jakarta.persistence.Table;
+import lombok.AllArgsConstructor;
+import lombok.Builder;
 import lombok.Getter;
+import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 @Entity
 @Getter
 @Setter
+@NoArgsConstructor
 @Table(name = "user")
 public class User {
   
@@ -25,7 +29,7 @@ public class User {
     @Column(name = "id")   // DB 컬럼명이 iid
     private Long id;
 
-    @Column(nullable=false, unique=true, length = 10)   // DB 컬럼명이 iid
+    @Column(nullable=false)   // DB 컬럼명이 iid
     private String name;
     
     @Column

@@ -6,7 +6,7 @@ import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
 
-import com.example.demo.domain.User;
+import com.example.demo.entity.User;
 
 public interface UserRepository extends JpaRepository<User, Long> {
 	// UserRepository는 JpaRepository<User, Long>를 상속하고 있기 때문에, 이미 기본적인 insert 기능은

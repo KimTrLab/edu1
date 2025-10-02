@@ -1,0 +1,7 @@
+DTO는 @Data + @Builder가 편리 → Request/Response 용도로 최적화
+
+Entity는 @Getter + @Setter + @NoArgsConstructor → DB 매핑 안정성 확보
+
+@Builder는 복잡한 객체 생성, 테스트 데이터 생성에도 유용
+
+@Slf4j는 로깅 편의, 별도의 LoggerFactory 불필요

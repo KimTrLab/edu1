@@ -9,8 +9,8 @@ import org.springframework.boot.test.context.SpringBootTest;
 
 import com.example.demo.Edu1Application;
 import com.example.demo.Service.UserService;
-import com.example.demo.domain.User;
 import com.example.demo.dto.UserDTO;
+import com.example.demo.entity.User;
 import com.example.demo.repository.UserRepository;
 
 //@Transactional   테스트할 때 이게 있으면 테스트 성공후 자동으로 롤백
@@ -27,10 +27,11 @@ public class MariaUserInsertTest {
 
     @Test
     public void testCreateUser() {
-    	UserDTO u = new UserDTO();
-    	u.setName("aaee");
-    	u.setEmail("aaa@aa.com");
-    	u.setPassword("1111");
+    	UserDTO u = UserDTO.builder()
+    			.name("kafe")
+    			.email("kaf@adf.com")
+    			.password("12345678")
+    			.build(); 
     	userService.registerUser(u);
         
     }

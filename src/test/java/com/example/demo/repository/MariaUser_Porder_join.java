@@ -5,8 +5,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 
 import com.example.demo.Edu1Application;
-import com.example.demo.domain.Porder;
-import com.example.demo.domain.User;
+import com.example.demo.entity.Porder;
+import com.example.demo.entity.User;
 
 //@Transactional   테스트할 때 이게 있으면 테스트 성공후 자동으로 롤백
 @SpringBootTest(classes = Edu1Application.class)
