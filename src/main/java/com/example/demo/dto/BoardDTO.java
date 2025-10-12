@@ -14,8 +14,7 @@ import lombok.NoArgsConstructor;
 @Builder
 @AllArgsConstructor
 @NoArgsConstructor
-public class BBSDTO {
-	
+public class BoardDTO {	
 	private int num;
 	private String category;
 	private String title;
@@ -27,7 +26,5 @@ public class BBSDTO {
 	private String inDate;
 	private List<String> savedFileNames;
 	private List<String> originalFileNames;
-	//ivate List<MultipartFile> files;
-	
-
+	//private List<MultipartFile> files;
 }

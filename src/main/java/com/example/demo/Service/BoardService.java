@@ -1,4 +1,4 @@
-package com.example.demo.Controller;
+package com.example.demo.Service;
 
 import java.io.File;
 import java.io.IOException;
@@ -10,36 +10,42 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.UUID;
 
-import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestPart;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
 
-import com.example.demo.dto.BBSDTO;
+import com.example.demo.dto.BoardDTO;
+import com.example.demo.entity.Board;
+import com.example.demo.entity.BoardAttach;
+import com.example.demo.repository.BoardRepository;
 
-@RestController
-@RequestMapping("/bbs/")
-public class BBSController {
+import lombok.RequiredArgsConstructor;
+
+@Service
+@RequiredArgsConstructor
+public class BoardService {
 	
 	private final String uploadDir = "C:/upload/files"; // 저장할 경로 (원하면 resources/static 등도 가능)
+	private final BoardRepository bbsRepository;
 	
-	@PostMapping("/save")
-	public ResponseEntity<String> save(
-			//@ModelAttribute BBSDTO bbsDTO,
-			@RequestPart("data") BBSDTO bbsDTO,  //클라이언트가 json, multipart/form-data 안에서 part 단위의 JSON을 기대
-	        @RequestPart(value="files", required = false) List<MultipartFile> files) {
+	public int saveBoard(BoardDTO bbsDTO, List<MultipartFile> files) throws IOException {
 		
-		//System.out.println(bbsDTO.toString());
-		//System.out.println(file.length);
+		  //dto를 entity로 바꾸기        
+        Board bbs = Board.builder()
+        		.category(bbsDTO.getCategory())
+        		.title(bbsDTO.getTitle())
+        		.content(bbsDTO.getContent())
+        		.userName(bbsDTO.getUserName())
+        		.pass(bbsDTO.getPass())
+        		.attachments(new ArrayList<>())  //BBS생성자로 하면 코딩된대로 되지만 builer로 만들때는 해 줘야 함
+        		.build();
+        
+		 // 결과 리스트
 		 // 결과 리스트
         List<String> savedFileNames = new ArrayList<>();
-        List<String> originalFileNames = new ArrayList<>();
-        
+        List<String> originalFileNames = new ArrayList<>();        
 
         try {
-            if (files != null && !files.isEmpty()) {
+            if (files != null) {
                 // 디렉토리가 존재하지 않으면 생성
                 File directory = new File(uploadDir);
                 if (!directory.exists()) {
@@ -71,23 +77,40 @@ public class BBSController {
                         file.transferTo(path);
 
                         savedFileNames.add(savedName);
+                        
+                        // 파일명만 DB에 저장
+                        BoardAttach attach = BoardAttach.builder()
+                                .fileName(originalName)
+                                .build();
+                        System.out.println(attach);
+                        bbs.addAttachment(attach);
+
                     }
                 }
             }
         } catch (IOException e) {
             e.printStackTrace();
-            return ResponseEntity.internalServerError().body("파일 저장 중 오류 발생: " + e.getMessage());
+            return 1;
         }
       //  System.out.println(originalFileNames);
       //  System.out.println(savedFileNames);
         bbsDTO.setOriginalFileNames(originalFileNames);
         bbsDTO.setSavedFileNames(savedFileNames);
-        
         System.out.println(bbsDTO.toString());
         
-        // 서비스 layers 해야 함.
-
-		return ResponseEntity.ok("업로드 성공");
+      
+        		        
+        
+        bbsRepository.save(bbs);
+        
+        // entity만들기
+        // board랑 board_attach 엔티티 만들기
+        // board 엔티티 객체 만들고 dto에 있는 내용 복사하기
+        // 첨부파일을 로컬 디렉토리에 복사하고 그 파일명을 가각 위에서 만든 board엔티티에 저장하기
+        // 마지막으로 board 엔티티 save하기
+        
+        return 2;		
 	}
+	
 
 }

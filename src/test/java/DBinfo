@@ -14,6 +14,24 @@ create table Porder(
 	user_id BIGINT 
 );
 
+create table board(
+num int primary key auto_increment,
+category varchar(6),
+title varchar(50),
+content varchar(200),
+user_name varchar(20),
+pass varchar(10),
+view_cnt int,
+nice_cnt int,
+in_date timestamp default SYSDATE()
+);
+
+
+create table board_attach(
+num int primary key auto_increment,
+board_num int,
+filename varchar(50)
+);
 
 
 commit;

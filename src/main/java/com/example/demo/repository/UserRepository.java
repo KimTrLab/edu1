@@ -13,6 +13,9 @@ public interface UserRepository extends JpaRepository<User, Long> {
 	// 내장돼 있습니다.
 	// 즉, userRepository.save(user)를 호출하면 JPA가 알아서 insert 또는 update를 수행합니다.
 
+	// JpaRepository의 findById, findAll, findByXXX 등 기본 메서드를 사용할 때 주로 Entity로 반환됩니다.
+	
+	
 	// JpaRepository는 메서드 이름을 보고 자동으로 쿼리를 만들어주는 기능이 있습니다. findById가 있는데 이거를 보고 자동으로
 	// 쿼리를 만듬
 	List<User> findByName(String name);
