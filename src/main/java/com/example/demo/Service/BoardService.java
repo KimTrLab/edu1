@@ -25,7 +25,7 @@ import lombok.RequiredArgsConstructor;
 public class BoardService {
 	
 	private final String uploadDir = "C:/upload/files"; // 저장할 경로 (원하면 resources/static 등도 가능)
-	private final BoardRepository bbsRepository;
+	private final BoardRepository boardRepository;
 	
 	public int saveBoard(BoardDTO bbsDTO, List<MultipartFile> files) throws IOException {
 		
@@ -101,7 +101,7 @@ public class BoardService {
       
         		        
         
-        bbsRepository.save(bbs);
+        boardRepository.save(bbs);
         
         // entity만들기
         // board랑 board_attach 엔티티 만들기
@@ -111,6 +111,10 @@ public class BoardService {
         
         return 2;		
 	}
+	
+	public List<Board> getAllBoards() {
+        return boardRepository.findAll(); // 👈 모든 튜플 조회
+    }
 	
 
 }

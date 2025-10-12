@@ -20,7 +20,7 @@ public class BoardAttach {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private int num;
+    private Integer num;
 
     private String fileName;
 

@@ -30,7 +30,7 @@ public class Board {
 	@Id   // 엔티티(Entity)에서 기본 키(Primary Key) 역할을 하는 필드임을 나타냅니다.
     @GeneratedValue(strategy = GenerationType.IDENTITY)  // 있으면 DB에서 자동으로 생성하는 룰에 따른다. 
     @Column(name = "num")   // DB 컬럼명이 iid
-	private int num;
+	private Integer num;
 	
 	@Column  // DB 컬럼명이 iid
 	private String category;
