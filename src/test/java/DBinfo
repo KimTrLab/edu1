@@ -30,7 +30,8 @@ in_date timestamp default SYSDATE()
 create table board_attach(
 num int primary key auto_increment,
 board_num int,
-filename varchar(50)
+file_name varchar(50)
+
 );
 
 
