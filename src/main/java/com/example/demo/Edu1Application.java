@@ -3,7 +3,7 @@ package com.example.demo;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
-@SpringBootApplication
+@SpringBootApplication  //Boot는 @SpringBootApplication 하나로 component-scan, @Configuration, @EnableAutoConfiguration
 public class Edu1Application {
 
 	public static void main(String[] args) {
