@@ -1,4 +1,4 @@
-package com.example.demo.Controller;
+package com.example.demo.RestController;
 
 import java.util.Map;
 

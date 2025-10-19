@@ -1,4 +1,4 @@
-package com.example.demo.Controller;
+package com.example.demo.RestController;
 
 import java.util.HashMap;
 
@@ -7,7 +7,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 @RestController
-public class Test {
+public class MainTitleInfoApI {
 	
 	@CrossOrigin(origins = "http://localhost:3000")
 	@GetMapping("/aa")
