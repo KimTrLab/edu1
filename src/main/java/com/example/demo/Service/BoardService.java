@@ -80,7 +80,7 @@ public class BoardService {
                         
                         // 파일명만 DB에 저장
                         BoardAttach attach = BoardAttach.builder()
-                                .fileName(originalName)
+                                .fileName(savedName)
                                 .build();
                         System.out.println(attach);
                         bbs.addAttachment(attach);
