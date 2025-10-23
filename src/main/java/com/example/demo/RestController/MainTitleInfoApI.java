@@ -2,14 +2,13 @@ package com.example.demo.RestController;
 
 import java.util.HashMap;
 
-import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 @RestController
 public class MainTitleInfoApI {
 	
-	@CrossOrigin(origins = "http://localhost:3000")
+	//@CrossOrigin(origins = "http://localhost:3000")
 	@GetMapping("/aa")
 	public HashMap<String,String> aaa () {
 		HashMap<String,String> h = new HashMap<>();

@@ -5,7 +5,6 @@ import java.util.Map;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.validation.BindingResult;
-import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -29,7 +28,7 @@ public class UserController {
 	// public ResponseEntity<String> register(@Valid @ModelAttribute UserDTO
 	// request, BindingResult bindingResult) {
 
-	@CrossOrigin(origins = "http://localhost:3000")
+	//@CrossOrigin(origins = "http://localhost:3000")
 	@PostMapping("/register")
     public ResponseEntity<?> register(@Valid @RequestBody UserDTO request, BindingResult bindingResult) {
 		
