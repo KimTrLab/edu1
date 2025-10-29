@@ -54,13 +54,13 @@ public class GetTopTen {
 		h.add("Java Is the Language of Possibilities Java is powering the innovation behind our digital world. Harness this potential with Java resources for student coders, hobbyists, developers, and IT leaders.");
 		h.add("Java Is the Language of Possibilities Java is powering the innovation behind our digital world. Harness this potential with Java resources for student coders, hobbyists, developers, and IT leaders.");
 		h.add("Java Is the Language of Possibilities Java is powering the innovation behind our digital world. Harness this potential with Java resources for student coders, hobbyists, developers, and IT leaders.");
-		//String result = String.join(",", h);
+		// String result = String.join(",", h);
 
 		String result = h.stream().map(s -> "\"" + s + "\"") // 각 요소에 쌍따옴표 추가
 				.collect(Collectors.joining(",")); // 쉼표로 구분
 		return result;
 	}
-	
+
 	@CrossOrigin(origins = "http://127.0.0.1:5500/")
 	@GetMapping("/getTopTenJson")
 	public String json() {
@@ -71,12 +71,13 @@ public class GetTopTen {
 		h.add("Java Is the Language of Possibilities Java is powering the innovation behind our digital world. Harness this potential with Java resources for student coders, hobbyists, developers, and IT leaders.");
 		h.add("Java Is the Language of Possibilities Java is powering the innovation behind our digital world. Harness this potential with Java resources for student coders, hobbyists, developers, and IT leaders.");
 		h.add("Java Is the Language of Possibilities Java is powering the innovation behind our digital world. Harness this potential with Java resources for student coders, hobbyists, developers, and IT leaders.");
-		//String result = String.join(",", h);
+		// String result = String.join(",", h);
 
 		String result = h.stream().map(s -> "\"" + s + "\"") // 각 요소에 쌍따옴표 추가
 				.collect(Collectors.joining(",")); // 쉼표로 구분
-		result = "["+result+"]";
+		result = "[" + result + "]";
 		return result;
 	}
 
+	
 }
